@@ -6,9 +6,11 @@ import { InternModule } from './intern/intern.module';
 import { PostModule } from './post/post.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { PostEntity } from './post/models/post-entity';
+import { PoeModule } from './poe/poe.module';
+import { Poe } from './poe/entities/poe.entity';
 
 @Module({
-  imports: [InternModule, PostModule, TypeOrmModule.forRoot(AppModule.mariaDBConfig)],
+  imports: [InternModule, PostModule, TypeOrmModule.forRoot(AppModule.mariaDBConfig), PoeModule],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -22,7 +24,8 @@ export class AppModule {
     database: 'post_repository',
     synchronize: true,
     entities: [
-      PostEntity
+      PostEntity,
+      Poe
     ],
   };
 }
