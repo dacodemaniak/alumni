@@ -1,14 +1,14 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Get } from '@nestjs/common';
-import { PostType } from './models/post.type';
 import { PostService } from './post.service';
+import { PostEntity } from './models/post-entity';
 
 @Controller('post')
 export class PostController {
     constructor(private _service: PostService) {}
     
     @Get()
-    findAll(): Array<PostType> {
-        return this._service.findAll()
+    async findAll(): Promise<Array<PostEntity>> {
+        return await this._service.findAll()
     }
 }
