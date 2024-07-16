@@ -5,7 +5,7 @@ import configuration from './configuration';
 
 @Module({
     imports: [ConfigModule.forRoot({
-        envFilePath: `src/environments/${process.cwd()}/.config.yml`,
+        //envFilePath: `src/environments/${process.cwd()}/.config.yml`,
         load: [configuration]
     })]
 })
