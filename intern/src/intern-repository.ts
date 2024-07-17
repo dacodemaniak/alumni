@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
+import { Injectable, Logger } from "@nestjs/common";
 import { InternType } from "./models/intern.type";
 
+@Injectable()
 export class InternRepository {
     private _interns: Array<InternType> = []
 
@@ -15,6 +17,9 @@ export class InternRepository {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     findOne(id: number): InternType | null {
+        const result: InternType | undefined =  this._interns.find((intern: InternType) => intern.id == id);
+        if (result)
+            return result;
         return null;
     }
 
@@ -38,6 +43,22 @@ export class InternRepository {
             company: {
                 id: 1,
                 name: 'Aélion'
+            },
+            poe: {
+                id: 1,
+                name: 'POEC Dev Mobile',
+                beginAt: new Date(2024, 5, 24),
+                endAt: new Date(2024, 8, 24)
+            }
+        })
+
+        this._interns.push({
+            id: 2,
+            lastname: 'Bebedev',
+            firstname: 'Anoushka',
+            company: {
+                id: 2,
+                name: 'Aeroflot'
             },
             poe: {
                 id: 1,

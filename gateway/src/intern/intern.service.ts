@@ -1,22 +1,30 @@
 /* eslint-disable prettier/prettier */
 import { Inject, Injectable } from '@nestjs/common';
-import { InternRepository } from './intern-repository';
 import { InternType } from './models/intern.type';
 import { ClientProxy } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class InternService {
-    private _repository: InternRepository;
 
     constructor(
         @Inject('INTERN') private _client: ClientProxy
     ) {
-        this._repository = new InternRepository();
     }
 
     findAll(): Observable<Array<InternType>> {
-        const pattern: any = {cmd: 'hello'};
+        const pattern: any = {intern: 'all'};
         return this._client.send<InternType[], any>(pattern, {});
+    }
+
+    findOne(id: number): Observable<InternType | undefined> {
+        const pattern: any = {intern: 'one'}
+        const payload: {id: number} = {id}
+
+        return this._client.send<InternType | undefined, any>(
+            pattern,
+            payload
+        )
+        
     }
 }

@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Logger, Param, Req, Res } from '@nestjs/common';
 import { InternService } from './intern.service';
 import { InternType } from './models/intern.type';
 import { Observable, take } from 'rxjs';
+import { Request, Response } from 'express';
 
-@Controller('intern')
+@Controller('api/v1/intern')
 export class InternController {
     constructor(
         private _service: InternService
@@ -16,5 +18,26 @@ export class InternController {
             .pipe(
                 take(1) // Autre façon  d'arrêter d'observer
             )
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: number, @Res() res: Response) {
+        
+        this._service.findOne(id)
+            .pipe(
+                take(1)
+            )
+            .subscribe({
+                next: (response: any) => {
+                    if (response) {
+                        res.status(200).send(response)
+                    } else {
+                        res.status(404).send()
+                    }
+                },
+                error: (error: any) => {
+                    res.status(500).send(error)
+                }
+            })
     }
 }
