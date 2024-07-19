@@ -5,6 +5,7 @@ import { LoginService } from '../services/login.service';
 import { take } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -18,7 +19,8 @@ export class SigninComponent  implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _service: LoginService,
-    private _toastController: ToastController
+    private _toastController: ToastController,
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +48,8 @@ export class SigninComponent  implements OnInit {
       .subscribe({
         next: async(response: HttpResponse<any>) => {
           if (response.status === 200) {
-            console.log(`ok, afficher les posts`)
+            this._router.navigate(['app', 'tabs', 'tab1'])
+              .then(() => console.log('Routing complete'))
           } else {
             const toast = await this._toastController.create({
               message: response.body.message,
@@ -58,7 +61,7 @@ export class SigninComponent  implements OnInit {
                 }
               ]
             })
-            await toast.present()
+            toast.present().then(() => null)
             toast.onWillDismiss()
               .then(() => this.form.reset())
           }
