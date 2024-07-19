@@ -59,7 +59,7 @@ export class SigninComponent  implements OnInit {
               ]
             })
             await toast.present()
-            toast.onDidDismiss()
+            toast.onWillDismiss()
               .then(() => this.form.reset())
           }
         },
