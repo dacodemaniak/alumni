@@ -12,7 +12,7 @@ export class InternController {
         private _service: InternService
     ) {}
 
-    @Get() // GET http://localhost:3000/intern
+    @Get() // GET http://localhost:3000/api/v1/intern
     findAll(): Observable<Array<InternType>> {
         return this._service.findAll()
             .pipe(
@@ -20,17 +20,18 @@ export class InternController {
             )
     }
 
-    @Get(':id')
-    findOne(@Param('id') id: number, @Res() res: Response) {
+    @Get(':id') // http://127.0.0.1:3000/api/v1/intern/99
+    findOne(@Param('id') id: number, @Res() res: Response): void {
         
         this._service.findOne(id)
             .pipe(
                 take(1)
             )
             .subscribe({
-                next: (response: any) => {
+                next: (response: InternType | null) => {
                     if (response) {
                         res.status(200).send(response)
+                        // Your rest of logic after response was send here
                     } else {
                         res.status(404).send()
                     }

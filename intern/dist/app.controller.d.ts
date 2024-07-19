@@ -1,7 +1,8 @@
 import { AppService } from './app.service';
+import { InternType } from './models/intern.type';
 export declare class AppController {
     private readonly appService;
     constructor(appService: AppService);
-    findOne(payload: any): import("./models/intern.type").InternType;
-    findAll(): import("./models/intern.type").InternType[];
+    findOne(payload: any): InternType | null;
+    findAll(): InternType[];
 }

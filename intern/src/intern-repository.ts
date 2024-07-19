@@ -17,10 +17,13 @@ export class InternRepository {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     findOne(id: number): InternType | null {
-        const result: InternType | undefined =  this._interns.find((intern: InternType) => intern.id == id);
-        if (result)
-            return result;
-        return null;
+        const result: InternType | undefined = this._interns
+            .find((intern: InternType) => intern.id == id);
+
+        return result ? result : null
+
+        if (result) return result
+        return null
     }
 
     add(intern: InternType): InternType {

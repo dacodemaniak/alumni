@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class InternService {
   private _interns: Array<InternType> = []
-  private readonly URI: string = 'http://localhost:3000/intern'
+  private readonly URI: string = 'http://localhost:3000/api/v1/intern'
 
   constructor(
     private _httpClient: HttpClient

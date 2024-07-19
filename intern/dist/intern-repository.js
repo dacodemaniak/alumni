@@ -21,7 +21,9 @@ let InternRepository = class InternRepository {
     }
     ;
     findOne(id) {
-        const result = this._interns.find((intern) => intern.id == id);
+        const result = this._interns
+            .find((intern) => intern.id == id);
+        return result ? result : null;
         if (result)
             return result;
         return null;

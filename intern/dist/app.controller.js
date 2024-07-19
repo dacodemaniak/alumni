@@ -29,7 +29,7 @@ __decorate([
     (0, microservices_1.MessagePattern)({ intern: 'one' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Object)
 ], AppController.prototype, "findOne", null);
 __decorate([
     (0, microservices_1.MessagePattern)({ intern: 'all' }),
