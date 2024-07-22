@@ -27,8 +27,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'app',
-    redirectTo: '',
+    path: '',
+    redirectTo: '/tabs',
     pathMatch: 'full'
   }
 ];
