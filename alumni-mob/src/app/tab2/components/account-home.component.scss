@@ -1,0 +1,8 @@
+:host {
+    --warn: rgb(200, 10, 10);
+}
+ion-item {
+    &.warn {
+        color: var(--warn);
+    }
+}
