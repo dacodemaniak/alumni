@@ -6,3 +6,13 @@ ion-item {
         color: var(--warn);
     }
 }
+
+button {
+    &.alert-button {
+        &.sc-ion-alert-md {
+            &.warn {
+                color: var(--warn);
+            }
+        }    
+    }
+}

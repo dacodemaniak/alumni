@@ -26,7 +26,8 @@ export class AccountHomeComponent  implements OnInit {
     })
     this.buttons.push({
       text: 'Non',
-      role: 'cancel'
+      role: 'cancel',
+      cssClass: 'warn'
     })
   }
 
