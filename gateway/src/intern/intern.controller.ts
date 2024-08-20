@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable prettier/prettier */
 import { Controller, Get, Logger, Param, Req, Res } from '@nestjs/common';
 import { InternService } from './intern.service';
 import { InternType } from './models/intern.type';

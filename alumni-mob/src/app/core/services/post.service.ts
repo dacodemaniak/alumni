@@ -30,6 +30,8 @@ export class PostService {
                 id: post.author.id,
                 lastname: post.author.lastname,
                 firstname: post.author.firstname,
+                gender: post.author.gender,
+                phoneNumber: post.author.phoneNumber,
                 occupation: post.author.occupation,
                 company: {
                   id: post.author.company.id,

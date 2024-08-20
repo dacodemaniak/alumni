@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Poe } from './entities/poe.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Poe])],
+  imports: [],
   controllers: [PoeController],
   providers: [PoeService],
 })

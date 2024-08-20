@@ -1,20 +1,32 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable prettier/prettier */
 import { Injectable, Logger } from '@nestjs/common';
-import { InternType } from './models/intern.type';
-import { InternRepository } from './intern-repository';
+import { InternService } from './intern-service.interface';
+import { Intern, InternDocument } from './models/intern.schema';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
-export class AppService {
+export class AppService implements InternService {
   constructor(
-    private _repository: InternRepository
+    @InjectModel(Intern.name) private internModel: Model<InternDocument>
   ) {}
-  
-  findOne(id: number): InternType | null {
-    return this._repository.findOne(id)
+
+  async save(intern: Intern): Promise<Intern | any> {
+    throw new Error('Method not implemented.');
   }
 
-  findAll(): Array<InternType> {
-    return this._repository.findAll()
+  async update(intern: Intern): Promise<Intern | any> {
+    throw new Error('Method not implemented.');
   }
+
+  async findOne(payload: any): Promise<Intern | any> {
+    return await this.internModel.findOne({
+      _id: payload.id
+    })
+  }
+  
+  async findAll(): Promise<Array<Intern>> {
+    return await this.internModel.find()
+  }
+  
+  
 }

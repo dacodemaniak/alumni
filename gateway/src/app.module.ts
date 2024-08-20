@@ -12,7 +12,6 @@ import { ConfigurationModule } from './config/configuration.module';
     InternModule,
     PostModule,
     PoeModule,
-    DatabaseModule,
     ConfigurationModule,
   ],
   controllers: [AppController],

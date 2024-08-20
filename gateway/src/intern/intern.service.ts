@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Inject, Injectable } from '@nestjs/common';
 import { InternType } from './models/intern.type';
 import { ClientProxy } from '@nestjs/microservices';

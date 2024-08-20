@@ -1,22 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable prettier/prettier */
 import { Controller, Logger } from '@nestjs/common';
 import { AppService } from './app.service';
 import { MessagePattern } from '@nestjs/microservices';
-import { InternType } from './models/intern.type';
+import { Intern } from './models/intern.schema';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @MessagePattern({intern: 'one'})
-  findOne(payload: any): InternType | null {
-    return this.appService.findOne(payload.id);
+  async findOne(payload: any): Promise<Intern | null> {
+    return await this.appService.findOne(payload.id);
   }
 
   @MessagePattern({intern: 'all'})
-  findAll() {
-    return this.appService.findAll()
+  async findAll(): Promise<Array<Intern>> {
+    return await this.appService.findAll()
   }
 
 
