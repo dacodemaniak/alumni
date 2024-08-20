@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { InternComponent } from './components/intern/intern.component';
 import { PostComponent } from './components/post/post.component';
 import { PostContentComponent } from './components/post-content/post-content.component';
+import { UserMenuComponent } from './components/user-menu/user-menu.component';
 
 
 
@@ -11,7 +12,8 @@ import { PostContentComponent } from './components/post-content/post-content.com
   declarations: [
     InternComponent,
     PostComponent,
-    PostContentComponent
+    PostContentComponent,
+    UserMenuComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { PostContentComponent } from './components/post-content/post-content.com
   exports: [
     InternComponent,
     PostComponent,
-    PostContentComponent
+    PostContentComponent,
+    UserMenuComponent
   ]
 })
 export class SharedModule { }
