@@ -32,7 +32,7 @@ export class InternComponent  implements OnInit {
         component: UserMenuComponent,
         translucent: true,
         mode: 'ios',
-        trigger: 'bottom-start',
+        trigger: this._internService.intern?._id,
         side: 'right',
         alignment: 'start'
       }
