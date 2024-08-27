@@ -11,7 +11,8 @@ export class AppService implements InternService {
   ) {}
 
   async save(intern: Intern): Promise<Intern | any> {
-    throw new Error('Method not implemented.');
+    const newIntern = new this.internModel(intern)
+    return newIntern.save()
   }
 
   async update(intern: Intern): Promise<Intern | any> {

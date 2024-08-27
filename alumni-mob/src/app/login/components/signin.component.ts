@@ -2,11 +2,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
-import { take } from 'rxjs';
+import { identity, take } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { WsChatService } from 'src/app/core/services/ws-chat.service';
+import { SocketConnectionType } from 'src/app/tab3/dto/socket-connection.type';
 
 @Component({
   selector: 'app-signin',
@@ -22,7 +24,8 @@ export class SigninComponent  implements OnInit {
     private _service: LoginService,
     private _toastController: ToastController,
     private _router: Router,
-    private _storage: StorageService
+    private _storage: StorageService,
+    private _wsService: WsChatService
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +55,23 @@ export class SigninComponent  implements OnInit {
           if (response.status === 200) {
             this._storage.store('auth', response.body.token)
             this._router.navigate(['tabs', 'tab1'])
-              .then(() => console.log('Routing complete'))
+              .then(() => {
+                console.log('Routing complete')
+                this._wsService.connect()
+                this._wsService.receiveIdentity()
+                  .subscribe((identity: SocketConnectionType) => {
+                    console.log(`Got ${identity.socketId} from Socket Server`)
+                    // Send the ID of the Intern (splitting token for sample)
+                    // Better return the full ID of the intern... but...
+                    const userId: string = ((response.body.token) as string).split('.')[0]
+                    const message: any = {
+                      socketId: identity.socketId,
+                      id: userId
+                    }
+                    this._wsService.sendIdentity(message)
+                    this._wsService.sid = identity.socketId
+                  })
+              })
           } else {
             const toast = await this._toastController.create({
               message: response.body.message,

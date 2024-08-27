@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { PoeModel } from "./poe.model";
+import { CompanyModel } from "./company.model";
 
 export type InternDocument = Intern & Document
 
@@ -22,6 +23,11 @@ export class Intern {
     })
     poe: PoeModel
 
+    @Prop({
+        type: CompanyModel
+    })
+    company: CompanyModel
+    
     @Prop()
     occupation: string
 

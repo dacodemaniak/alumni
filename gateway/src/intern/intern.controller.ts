@@ -1,4 +1,4 @@
-import { Controller, Get, Logger, Param, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Logger, Param, Post, Req, Res } from '@nestjs/common';
 import { InternService } from './intern.service';
 import { InternType } from './models/intern.type';
 import { Observable, take } from 'rxjs';
@@ -36,6 +36,26 @@ export class InternController {
                 },
                 error: (error: any) => {
                     res.status(500).send(error)
+                }
+            })
+    }
+
+    @Post()
+    add(@Body() intern: InternType, @Res() response: Response) {
+        this._service.add(intern)
+            .pipe(
+                take(1)
+            )
+            .subscribe({
+                next: (intern: any) => {
+                    response
+                        .status(HttpStatus.CREATED)
+                        .send(intern)
+                },
+                error: (error: any) => {
+                    response
+                        .status(HttpStatus.BAD_REQUEST)
+                        .send(error)
                 }
             })
     }

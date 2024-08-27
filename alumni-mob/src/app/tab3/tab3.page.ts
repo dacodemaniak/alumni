@@ -13,7 +13,7 @@ export class Tab3Page implements OnInit {
   public interns: Array<InternType> = []
 
   constructor(
-    private _service: InternService
+    private _service: InternService,
   ) {}
 
   ngOnInit(): void {
@@ -27,5 +27,9 @@ export class Tab3Page implements OnInit {
         },
         error: (error: any) => {}
       })
+  }
+
+  onCancel(): void {
+    return
   }
 }

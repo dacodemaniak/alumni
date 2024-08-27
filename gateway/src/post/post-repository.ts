@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { PostType } from "./models/post.type";
 
 export class PostRepository {
@@ -23,6 +22,9 @@ export class PostRepository {
                 lastname: 'Aubert',
                 firstname: 'Jean-Luc',
                 occupation: 'Formateur',
+                gender: 'male',
+                phoneNumber: '0608097867',
+                emails: ['jean-luc.aubert@aelion.fr'],
                 company: {
                     id: 1,
                     name: 'Aélion'
@@ -44,6 +46,9 @@ export class PostRepository {
                 id: 1,
                 lastname: 'Ngamba',
                 firstname: 'Boris',
+                gender: 'male',
+                phoneNumber: '0608097867',
+                emails: ['jean-luc.aubert@aelion.fr'],
                 company: {
                     id: 1,
                     name: 'Aélion'

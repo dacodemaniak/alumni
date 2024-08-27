@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class InternService {
 
+
     constructor(
         @Inject('INTERN') private _client: ClientProxy
     ) {
@@ -25,5 +26,9 @@ export class InternService {
             payload
         )
         
+    }
+
+    add(intern: InternType) {
+        return this._client.send({intern: 'add'}, intern)
     }
 }

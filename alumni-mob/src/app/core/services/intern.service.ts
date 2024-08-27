@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { InternType } from '../types/intern/intern-type';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { filter, map, Observable, take } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class InternService {
   private _intern: InternType | null = null
 
   constructor(
-    private _httpClient: HttpClient
+    private _httpClient: HttpClient,
+    private _storageService: StorageService
   ) {}
 
   public companyFilter(company: string): Array<InternType> {
@@ -24,8 +26,15 @@ export class InternService {
    * @returns Observable<InternType[]>
    */
   public findAll(): Observable<Array<InternType>> {
+    const token: string = this._storageService.retrieve('auth')
+    const internId: string = token?.split('.')[0]
     return this._httpClient.get<Array<InternType>>(
       this.URI
+    ).pipe(
+      take(1),
+      map((interns: Array<InternType>) => {
+        return interns.filter((intern: InternType) => intern._id !== internId)
+      })
     )
   }
 

@@ -17,5 +17,10 @@ export class AppController {
     return await this.appService.findAll()
   }
 
+  @MessagePattern({intern: 'add'})
+  async add(payload: Intern) {
+    return await this.appService.save(payload)
+  }
+
 
 }
